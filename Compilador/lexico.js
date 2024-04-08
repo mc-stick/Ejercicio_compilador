@@ -6,6 +6,8 @@ function Ejecutar_lexico() {
 
     document.getElementById('result_lex').textContent = replace; //JSON.stringify(tokens);
     mostrarTabla(tokens);
+
+    GenerarCode(tokens);
   }
 
   function lex(input) {
@@ -53,7 +55,7 @@ function Ejecutar_lexico() {
         continue;
       }
 
-      if (/[\?\{\.\}\\\(\)\'\:\[\]\;\,\"]/.test(char)) {
+      if (/[\?\{\.\}\\\(\)\'\:\[\]\;\,]/.test(char)) {
         tokens.push({ type: 'Simbolo', value: char ,l:'' });
         current++;
         continue;

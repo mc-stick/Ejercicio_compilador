@@ -1,71 +1,64 @@
 function generarCodigo(tokens) {
     let codigo = '';
-    let current = 0;
+    let space=" ";
+    let cont=0;
 
-    function avanzar() {
-        current++;
-    }
+    // Recorre cada token y genera el código correspondiente
+    tokens.forEach(token => {
+        if (token.type === 'Nombre de variable') {
+            // Si el tipo es "Nombre de variable", agrega el valor del token al código
+            codigo += token.value + ' ';
+        } else if (token.type === 'numero') {
+            // Si el tipo es "numero", agrega el valor del token al código
+            codigo += token.value + ' ';
+        } else if (token.type === 'operador') {
+            // Si el tipo es "operador", agrega el valor del token al código
+            codigo += token.value + ' ';
+        } else if (token.type === 'Simbolo') {
+            if(token.value==="{"){/////////////////////////////////////////////////////////
+                
+                cont++;
+                codigo+= token.value +'<br/>'
 
-    function tokenActual() {
-        return tokens[current];
-    }
-
-    function error(mensaje) {
-        throw new Error(mensaje);
-    }
-
-    function generarExpresion() {
-        let token = tokenActual();
-        if (token && token.type === 'numero') {
-            avanzar();
-            return token.value;
-        } else if (token && token.type === 'identificador') {
-            avanzar();
-            return token.value;
-        } else {
-            error('Error de sintaxis: se esperaba un número o un identificador.');
-        }
-    }
-
-    function generarDeclaracion() {
-        let token = tokenActual();
-        console.log("token",token, "type:",token.type)
-        if (token && token.type === 'identificador') { //aqui esta el error
-            avanzar();
-            codigo += 'let ' + token.value;
-            token = tokenActual();
-            if (token && token.type === '=') {
-                avanzar();
-                codigo += ' = ' + generarExpresion();
+                for(let i=0;i<=cont;i++){
+                    codigo+=space;
+                }
             }
-            codigo += ';\n';
+            else if(token.value ===';'){
+                
+                codigo += token.value + '<br/>';
+            
+            }else if(token.value==="}"){
+                cont--;
+                codigo+= token.value +'<br/>';
+                for(let i=0;i<=cont;i++){
+                    codigo+=space;
+                }
+            }
+            else{
+                codigo += token.value + ' ';
+            }
+            // Si el tipo es "Simbolo", agrega el valor del token al código
+            
         } else {
-            error('Error de sintaxis: se esperaba un identificador.');
+            // Si el tipo no es reconocido, emite un error
+            throw new Error('Tipo de token no válido: ' + token.type);
         }
-    }
+    });
 
-    while (current < tokens.length) {
-        generarDeclaracion();
-    }
-
-    return codigo;
+    return codigo // Elimina los espacios en blanco sobrantes al final del código
 }
 
-// Ejemplo de uso
-const tokens = [
-    { type: 'identificador', value: 'x' },
-    { type: 'operador', value: '=' },
-    { type: 'numero', value: '10' },
-    { type: 'Simbolo', value: ';' },
-    { type: 'identificador', value: 'y' },
-    { type: 'operador', value: '=' },
-    { type: 'numero', value: '20' },
-    { type: 'Simbolo', value: ';' }
-];
 
-function GenerarCode(){
-    const codigoGenerado = generarCodigo(tokens);
+function GenerarCode(token){
+const codigoGenerado = generarCodigo(token);
 console.log('Código generado:');
 console.log(codigoGenerado);
-}
 
+const elem_res_generate=document.getElementById('result_generate');
+
+elem_res_generate.innerHTML=codigoGenerado;
+
+// document.getElementById('result_generate').textContent = JSON.stringify(codigoGenerado, null, 2);
+
+}

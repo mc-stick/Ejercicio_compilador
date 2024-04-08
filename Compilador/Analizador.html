@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Analizador Sintáctico</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -20,42 +20,59 @@
       }
     </style>
   </head>
-  <body>
-    <h1>Compilador de codigo JavaScript</h1>
-
-    <div>
-      <div style="display: inline-block; ">
-        <h5>Aqui le dejo un ejemplo de prueba para que copie y lo pegue en el cuadro.</h5>
-  <p style="background-color: lightgray; padding: 20px; border-radius: 20px;">int x=10;<br>
-
+  <body style="background-color: bisque">
     
-    string c="casa";
-    <br>
-    function codigo(){<br>
-    if(x==0){<br>
-    x=11;<br>
-    } <br>
-    } <br>
-    <br>
-    function codigo_con_parametro(x){<br>
-    if(x==1){<br>
-    x=0 <br>
-    } <br>
-    else{x=11} <br>
-    }</p><p></p>
-      </div>
-      <div style="display: inline-block">
-        <label for="code">Ingrese el código:</label><br />
-        <textarea
-          style="border-radius: 10px; height: 260px; width: 500%"
+
+    <div style="display: inline-block; text-align: center; margin: 30px; width: 95%;">
+      <label style="text-align: center;"><b>Compilador de codigo JavaScript</b></label>
+      
+      <div style="display: flex; width: 100%;">
+        <div style=" width: 100%;">
+          <label  for="code"
+          ><b>ingrese código JavaScript:</b> </label
+        ><br />
+        <div
+        style="
+          margin-top: 20px;
+            background-color: #eeeeee;
+            display: inline-block;
+            border: 1px solid black;
+            
+            border-radius: 10px;
+            height: 260px;
+            width: 100%;
+          "><textarea
+          style="height: 90%;
+          background-color: #eeeeee;
+          border: 0;
+          width: 90%;
+          margin: 2%;
+          outline: none;
+          "
           id="code"
-        ></textarea>
-      </div>
-      <div style="display: inline-flex; margin-left: 1000px">
-        <button
+        >
+var x=10;
+let c='casa';
+  function codigo(){
+    if(x==0){
+      x=11;
+    }
+  }
+      
+  function codigo_con_parametro(x){
+    if(x==1){
+      x=0
+    }
+    else{x=11}
+   }</textarea></div>
+        
+        </div>
+        <div ><button
           style="
             color: white;
             font-weight: bold;
+            margin: 0 20px;
+            margin-top: 50px;
             font-size: large;
             background-color: green;
             border: 2px solid black;
@@ -63,44 +80,44 @@
           "
           onclick="Ejecutar()"
         >
-          Analizar
-        </button>
+          Compilar
+        </button></div>
+        
+        <div style="width: 100%;"
+          
+          
+        >
+          <label><b>Traducir a C#</b></label>
+          <div class="result_cSharp" style="margin: 10px; 
+          text-align:left;
+            border-radius: 10px;
+            height: 260px;
+            width: 100%;
+            border: 1px solid black;
+            ">
+          <pre
+          class="result_share"
+           style="    height: 90%;
+           width: 95%;
+           border: none;
+           margin: 20px;
+           font-style: italic;
+            font-weight: bold;
+            color: blueviolet;
+           
+          " id="result_cSharp"></pre></div>
+          
+        </div>
       </div>
     </div>
 
-    <div class="resultado_content">
-      <div  class="result_share result_lex">
-        <h2>Analisis Lexico</h2>
-        <pre id="result_lex"></pre>
-      </div>
-      <div class="result_share result_sintax">
-        <h2>Analisis sintactico</h2>
-        <pre id="result_sintax"></pre>
-      </div>
-      
-      <div class="result_share result_cSharp">
-        <h2>Traductor a C#</h2>
-        <pre id="result_cSharp"></pre>
-      </div>
-      <div class="result_share table">
-        <h2>Tabla de Símbolos</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th style="align-items: center;">Tipo</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody id="tabla_simbolos_body">
-          </tbody>
-        </table>
-      </div>
+    <div style="text-align: center;" class="resultado_content" id="resultado_content">
+     
     </div>
 
     <script src="Analizador_sintactico.js"></script>
     <script src="lexico.js"></script>
     <script src="Generador_codig0.js"></script>
     <script src="TraduciraCSharp.js"></script>
-
   </body>
 </html>

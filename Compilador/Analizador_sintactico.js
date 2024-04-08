@@ -1,15 +1,47 @@
 function Ejecutar() {
+
+    const list_results = document.getElementById("resultado_content");
+
+      list_results.innerHTML = `<div class="result_share result_lex">
+      <h2>Analisis Lexico</h2>
+      <pre id="result_lex"></pre>
+    </div>
+    <div class="result_share result_sintax">
+      <h2>Analisis sintactico</h2>
+      <pre id="result_sintax"></pre>
+    </div>
+
+    <div class="result_share table">
+      <h2>Tabla de Símbolos</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th style="align-items: center">Tipo</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody id="tabla_simbolos_body"></tbody>
+      </table>
+    </div>
+
+    <div  class="result_share result_generate">
+    <h2>Codigo Generado</h2>
+    <pre style=" text-align:left;
+   " id="result_generate"></pre>
+  </div>
+
+    `;
+    
   
    Ejecutar_lexico();
 
       const code = document.getElementById('code').value;
     const result = Sintax_function(code);
-    //Modificar a result sin el 1
     document.getElementById('result_sintax').textContent = JSON.stringify(result, null, 2);
     
-   
-    //GenerarCode();
     GenerarCSharp();
+    
+    
   }
     
   
@@ -27,8 +59,9 @@ function Ejecutar() {
     }
   
     
-    const V_declaraciones = /(\bint\b|\bstring\b)\s+([a-zA-Z_$][\w$]*)/g;
+    const V_declaraciones = /(\blet\b|\bconst\b|\bvar\b)\s+([a-zA-Z_$][\w$]*)/g;
     const ifEstados = /if\s*\(([^)]*)\)\s*{([^}]*)}\s*(?:else\s*{([^}]*)})?/g;
+  
   
     let variables = [];
     let variableMatch;
